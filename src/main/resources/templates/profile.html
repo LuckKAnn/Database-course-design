@@ -82,33 +82,39 @@
                 </nav>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
-            <div>
-                <a href="#">
-                    <img class="thumbnail"
-                         th:src="${session.user.avatarUrl}">
-                </a>
-                <h1>
-                    <span th:text="${session.user.getName()}"></span>
-                </h1>
-                <h3 th:if="${session.user.bio!= null}">
-                    <span th:text="${session.user.bio}"></span>
-                </h3>
-                <div class="">
-                    <button type="button" class="btn btn-default modify-profile">
-                        <a href="/profile/modify">修改个人信息</a>
-                    </button>
+
+            <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 " th:if="${session.user!=null}">
+                <div>
+                    <a href="#">
+                        <img class="thumbnail" style="width: 50%;margin: 0 auto;margin-top: 30px;"
+                             th:src="${session.user.avatarUrl}">
+                    </a>
+                    <h1>
+                        <p th:text="${session.user.getName()}" style="width:100%;text-align: center;"></p>
+                    </h1>
+                    <h3>
+                        个性签名: <span  th:if="${session.user.bio== null}" >这个人很懒，没有个性签名</span>
+                        <span  th:if="${session.user.bio!= null}" th:text="${session.user.bio}"></span>
+                    </h3>
+                    <div class="">
+                        <button type="button" class="btn  btn-info modify-profile"  style="width:100%;">
+                            <a href="/profile/modify" style="color: #fff;">修改个人信息</a>
+                        </button>
+                    </div>
+                    <p></p>
+                    <a href="/profile/questions" style="width: 100%;"
+                       th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
+                    <p></p>
+                    <a href="/profile/replies" style="width: 100%;"
+                       th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
+                        最新回复
+                        <span class="badge" th:text="${session.unreadCount}"></span>
+                    </a>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-8 col-sm-12 col-xs-12 list-group section">
-                <a href="/profile/questions"
-                   th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
-                <a href="/profile/replies"
-                   th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
-                    最新回复
-                    <span class="badge" th:text="${session.unreadCount}"></span>
-                </a>
-            </div>
+
+         <div style="height: 100px;"></div>
+
         </div>
     </div>
 </div>

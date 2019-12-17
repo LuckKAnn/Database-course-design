@@ -5,6 +5,7 @@ import scu.cj.community.model.Ad;
 import scu.cj.community.model.AdExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
+import scu.cj.community.model.Advertisement;
 
 public interface AdMapper {
     /**
@@ -102,4 +103,7 @@ public interface AdMapper {
      * @mbg.generated Fri Dec 13 20:10:37 CST 2019
      */
     int updateByPrimaryKey(Ad record);
+
+
+    List<Advertisement> getAll();
 }

@@ -5,6 +5,7 @@ import scu.cj.community.model.Ad;
 import scu.cj.community.model.AdExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import scu.cj.community.model.Advertisement;
 
 import java.util.List;
 
@@ -21,5 +22,11 @@ public class AdService {
                 .andGmtStartLessThan(System.currentTimeMillis())
                 .andGmtEndGreaterThan(System.currentTimeMillis());
         return adMapper.selectByExample(navExample);
+    }
+
+
+    public List<Advertisement> getAll(){
+        return adMapper.getAll();
+
     }
 }

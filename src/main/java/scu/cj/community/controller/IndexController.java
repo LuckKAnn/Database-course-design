@@ -2,7 +2,9 @@ package scu.cj.community.controller;
 
 import scu.cj.community.cache.HotTagCache;
 import scu.cj.community.dto.PaginationDTO;
+import scu.cj.community.model.Advertisement;
 import scu.cj.community.model.Question;
+import scu.cj.community.service.AdService;
 import scu.cj.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +25,9 @@ public class IndexController {
     @Autowired
     private HotTagCache hotTagCache;
 
+    @Autowired
+    private AdService adService;
+
 
     @GetMapping("/")
     public String index(Model model,
@@ -34,9 +39,11 @@ public class IndexController {
                         HttpServletResponse response) {
         PaginationDTO pagination = questionService.list(search, tag, sort, page, size);
         List<Question> recommands = questionService.getRecommand();
+        List<Advertisement> advs = adService.getAll();
         List<String> tags = hotTagCache.getHots();
         model.addAttribute("pagination", pagination);
         model.addAttribute("search", search);
+        model.addAttribute("advs", advs);
         model.addAttribute("tag", tag);
         model.addAttribute("recommands",recommands);
         model.addAttribute("tags", tags);

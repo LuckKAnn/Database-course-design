@@ -16,7 +16,7 @@
                 <div class="media" th:each="question : ${pagination.data}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded" style="height: 100px;width: 100px;"
+                            <img class="media-object img-rounded"
                                  th:src="${question.user.avatarUrl}">
                         </a>
                     </div>
@@ -82,43 +82,25 @@
                 </nav>
             </div>
         </div>
-        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 ">
-            <form action="/profile" method="post">
-                <div>
-                    <a href="#">
-                        <img class="thumbnail" th:src="${session.user.avatarUrl}" style="width: 50%;margin: 0 auto;margin-top: 30px;">
-                    </a>
-                    <h1>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12 " th:if="${session.seeUser!=null} ">
+            <div>
+                <a href="#">
+                    <img class="thumbnail" style="width: 50%;margin: 0 auto;margin-top: 30px;"
+                         th:src="${session.seeUser.avatarUrl}">
+                </a>
+                <h1>
+                    <p th:text="${session.seeUser.getName()}" style="width:100%;text-align: center;"></p>
+                </h1>
+                <h3>
+                    个性签名: <span  th:if="${session.seeUser.bio== null ||session.seeUser.bio==''}" >这个人很懒，没有个性签名</span>
+                    <span  th:if="${session.seeUser.bio!= null}" th:text="${session.seeUser.bio}"></span>
+                </h3>
 
-                        <input id="userName" name="userName" class="form-control" th:value="${userName}" type="text" style="width: 200px;
-    height: 50px;
-    font-size: 20px;">
-                    </h1>
-                    <h3 >
-                        <label for="bio">个性签名</label>
-                        <input id="bio" name="bio" class="form-control" th:value="${userBio}" type="text" style="width: 470px;
-    height: 50px;
-    font-size: 18px;">
-                    </h3>
-                    <div class="">
-                        <button type="submit" class="btn  btn-info modify-profile"  style="width:100%;">
-                           修改个人信息
-                        </button>
-                    </div>
-                    <p></p>
-                    <a href="/profile/questions" style="width: 100%;"
-                       th:class="${section == 'questions'}? 'active list-group-item' : 'list-group-item'">我的问题</a>
-                    <p></p>
-                    <a href="/profile/replies" style="width: 100%;"
-                       th:class="${section == 'replies'}? 'active list-group-item' : 'list-group-item'">
-                        最新回复
-                        <span class="badge" th:text="${session.unreadCount}"></span>
-                    </a>
-                </div>
-            </form>
-            <div style="height: 100px;"></div>
-
+            </div>
         </div>
+
+         <div style="height: 100px;"></div>
+
         </div>
     </div>
 </div>
